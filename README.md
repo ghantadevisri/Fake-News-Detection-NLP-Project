@@ -1,65 +1,35 @@
-# Fake News Detection using NLP
+# Stock Market Sentiment Analysis
 
-### By Ghanta DeviSri | B.Tech CSE Data Science | SPSU
-
-![Python](https://img.shields.io/badge/Python-3.8+-blue)
-![ML](https://img.shields.io/badge/Machine%20Learning-Scikit--learn-orange)
-![NLP](https://img.shields.io/badge/NLP-NLTK-green)
+Predicting stock price movements using NLP sentiment analysis on financial news headlines.
 
 ## Project Overview
-In today's world, fake news spreads faster than real news. 
-This project builds a Machine Learning model that automatically 
-detects whether a news article is **FAKE or REAL** using 
-Natural Language Processing techniques.
+This project builds a two-component pipeline:
+- Component A: Classifies financial news headlines as positive, negative, or neutral using TF-IDF + XGBoost, benchmarked against FinBERT
+- Component B: Predicts AAPL stock price movement using technical indicators (MA5, MA10, volatility, returns)
+
+## Tech Stack
+Python, FinBERT (HuggingFace), XGBoost, yfinance, Scikit-learn, Pandas, Matplotlib, Streamlit
+
+## Results
+| Model | Task | Accuracy |
+|---|---|---|
+| FinBERT | Sentiment Classification | 88.98% |
+| TF-IDF + XGBoost | Sentiment Classification | 74.28% |
+| XGBoost | Price Movement Prediction | 52.00% |
+
+## Progress
+- [x] Week 1: Data collection & exploration
+- [x] Week 2: Sentiment scoring with FinBERT
+- [x] Week 3: ML model training
+- [x] Week 4: Streamlit dashboard
+
+## Limitations
+- Financial PhraseBank has no timestamps, so sentiment data cannot be directly merged with stock price data. Both components are demonstrated separately.
+- The custom XGBoost sentiment model underperforms on negative class due to class imbalance (only 12% negative samples).
+- 52% price prediction accuracy is consistent with the Efficient Market Hypothesis.
 
 ## Dataset
-- Source: Kaggle News Dataset
-- Size: 6,335 news articles
-- Labels: FAKE or REAL
-- Features: Article title and full text
+Financial PhraseBank — [Kaggle](https://www.kaggle.com/datasets/ankurzing/sentiment-analysis-for-financial-news)
 
-## Technologies Used
-- Python
-- Jupyter Notebook
-- Pandas, NumPy
-- Matplotlib, Seaborn
-- NLTK
-- Scikit-learn
-- VADER Sentiment Analysis
-
-## NLP Pipeline
-1. Exploratory Data Analysis (EDA)
-2. Text Preprocessing & Cleaning
-3. Tokenization & Lemmatization
-4. TF-IDF Vectorization with N-grams
-5. Model Training & Comparison
-6. Model Evaluation
-7. Sentiment Analysis
-8. Model Saving with Pickle
-
-## Models Used
-| Model | Accuracy |
-|---|---|
-| Logistic Regression | ~98% |
-| Naive Bayes | ~95% |
-| Random Forest | ~99% |
-
-## Key Findings
-- FAKE news articles are longer than REAL news
-- FAKE news uses more sensational phrases
-- Domain mismatch observed with Indian news headlines
-- TF-IDF with N-grams improved model performance
-
-## Project Structure
-```
-├── News.ipynb               # Main notebook
-├── news.csv                 # Dataset
-├── fake_news_model.pkl      # Saved model
-└── tfidf_vectorizer.pkl     # Saved TF-IDF vectorizer
-```
-
-## How To Run
-1. Clone this repository
-2. Install required libraries
-3. Open News.ipynb in Jupyter Notebook
-4. Run all cells from top to bottom
+## How to Run
+streamlit run app.py
